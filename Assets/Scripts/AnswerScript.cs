@@ -10,14 +10,15 @@ public class AnswerScript : MonoBehaviour
     {
         if(isCorrect)
         {
+            quizManager.Score++;
             Debug.Log("Correct answer");
-            quizManager.Correct();
         }
         else
         {
             Debug.Log("NOT CORRECT");
         }
 
+        quizManager.Next();
 
 
     }

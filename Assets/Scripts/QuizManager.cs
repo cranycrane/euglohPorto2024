@@ -18,26 +18,13 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
-        generateQuestion();
+        GenerateQuestion();
     }
 
-    public void Correct()
+    public void Next()
     {
-        Score++;
         QnA.RemoveAt(0);
-
-        if (QnA.Count > 0)
-        {
-            generateQuestion();
-        }
-        else
-        {
-            for (int i = 0; i < options.Length; i++)
-            {
-                options[i].SetActive(false);
-            }
-            QuestionTxt.text = FinishText + Score.ToString();
-        }
+        GenerateQuestion();
     }
 
     void SetAnswers()
@@ -54,13 +41,21 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    void generateQuestion()
+    public void GenerateQuestion()
     {
+        if (QnA.Count <= 0)
+        {
+            for (int i = 0; i < options.Length; i++)
+            {
+                options[i].SetActive(false);
+            }
+            QuestionTxt.text = FinishText + Score.ToString();
+            return;
+        }
+
         ImageCard.GetComponent<Image>().sprite = QnA[0].Image;
         QuestionTxt.text = QnA[0].Question;
     
         SetAnswers();
-
-        //currentQuestionIndex++;
     }
 }
