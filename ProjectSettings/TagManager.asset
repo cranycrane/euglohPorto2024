@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Anchor
   - SnapObj
+  - rightController
+  - leftController
   layers:
   - Default
   - TransparentFX
