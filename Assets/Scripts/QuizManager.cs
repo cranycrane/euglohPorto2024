@@ -6,11 +6,15 @@ using UnityEngine.UI;
 public class QuizManager : MonoBehaviour
 {
     public List<QuestionsAndAnswers> QnA;
+    public int QuestionsCount;
     public GameObject ImageCard;
     public GameObject[] options;
     public int Score = 0;
     public string FinishText;
 
+    public AudioSource audioSource;
+    public AudioClip correctSound;
+    public AudioClip wrongSound;
 
     public int currentQuestionIndex = 0;
 
@@ -18,7 +22,23 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
+        QuestionsCount = QnA.Count;
         GenerateQuestion();
+    }
+
+    public void Correct()
+    {
+        audioSource.clip = correctSound;
+        audioSource.Play();
+        Score++;
+        Next();
+    }
+
+    public void InCorrect()
+    {
+        audioSource.clip = wrongSound;
+        audioSource.Play();
+        Next();
     }
 
     public void Next()
@@ -49,7 +69,7 @@ public class QuizManager : MonoBehaviour
             {
                 options[i].SetActive(false);
             }
-            QuestionTxt.text = FinishText + Score.ToString();
+            QuestionTxt.text = FinishText + Score.ToString() + "/" + QuestionsCount;
             return;
         }
 
