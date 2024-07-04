@@ -26,11 +26,15 @@ public class BoxMovementOnHandDistance : MonoBehaviour
     private float finalTimeDisplayTime = 0f;
     private Sequence heartbeatSequence;
 
+    public AudioSource audioSource;
+    public AudioClip heartBeatSong;
+
     void Start()
     {
         boxRenderer = GetComponent<Renderer>();
         originalColor = boxRenderer.material.color;
         startPosition = transform.position;
+        audioSource.clip = heartBeatSong;
         heartbeatSequence = DOTween.Sequence();
         heartbeatSequence.Append(transform.DOMove(startPosition + transform.up * moveDistance, moveDuration).SetEase(Ease.InOutSine));
         heartbeatSequence.Append(transform.DOMove(startPosition, moveDuration).SetEase(Ease.InOutSine));
@@ -59,6 +63,7 @@ public class BoxMovementOnHandDistance : MonoBehaviour
         if (timerStarted && countdownTime <= 0f)
         {
             timerStarted = false;
+            audioSource.Stop();
             isMoving = false;
             boxRenderer.material.color = originalColor;
             heartbeatSequence.Pause();
@@ -72,6 +77,7 @@ public class BoxMovementOnHandDistance : MonoBehaviour
             {
                 isMoving = true;
                 heartbeatSequence.Play();
+                audioSource.Play();
                 // change color to red
                 boxRenderer.material.color = new Color(1, 0, 0, 0.5f); ;
                 timeInArea = 0f;
