@@ -7,11 +7,13 @@ public class BoxMovementOnHandDistance : MonoBehaviour
 {
     public GameObject leftHand; 
     public GameObject rightHand; 
+    public GameObject heartVibration;
     public float activationDistance = 0.5f; 
     public float beatInterval = 0.6f;
     public float moveDistance = 1.0f;
     public float moveDuration = 0.3f;
     public TextMeshProUGUI timerText;
+    public float successEfficiency = 0.7f;
 
     private Renderer boxRenderer;
     private Color originalColor;
@@ -110,10 +112,19 @@ public class BoxMovementOnHandDistance : MonoBehaviour
 
     void ShowFinalTime()
     {
+        timerText.text = "Can you feel the heart rate? If not, try massage again.";
+
+        if ((timeInArea / countdownTime) >= successEfficiency)
+        {
+            Debug.Log("Pacient saved!");
+            breathingZone heartVibrationScript = GetComponent<breathingZone>();
+            heartVibrationScript.enabled = true;
+        }
+
         showFinalTime = true;
         finalTimeDisplayTime = 0f;
         int minutes = Mathf.FloorToInt(timeInArea / 60F);
         int seconds = Mathf.FloorToInt(timeInArea % 60F);
-        timerText.text = string.Format("Total time in area: {0:00}:{1:00}", minutes, seconds);
+        timerText.text += string.Format("\nTotal time in area: {0:00}:{1:00}", minutes, seconds);
     }
 }

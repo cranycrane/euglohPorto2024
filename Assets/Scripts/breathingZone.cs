@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class breathingZone : MonoBehaviour
 {
-    [SerializeField]
-    XRBaseController rightController;
-
-    [SerializeField]
-    XRBaseController leftController;
+    public bool isBreathing = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,36 +17,22 @@ public class breathingZone : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("COLLIDING");
         // if the controller is the left hand
-        if (other.CompareTag("leftController") && GlobalVariables.isBreathing)
+        if (other.CompareTag("GameController") && isBreathing)
         {
-            SendLeftHapticsImpulse(0.5f);
+            Debug.Log("VIBRATING");
+            var xrController = other.GetComponent<XRBaseController>();
+            if (xrController != null)
+            {
+                xrController.SendHapticImpulse(0.5f, 0.5f);
+            }
+            else
+            {
+                Debug.Log("ERROR: WRONG CONTROLLER");
+            }
         }
 
-    
 
-        // if the controller is the right hand
-        if (other.CompareTag("rightController") && GlobalVariables.isBreathing)
-        {
-            SendRightHapticsImpulse(0.5f);
-        }
-
-
-    }
-
-    void SendRightHapticsImpulse(float duration)
-    {
-        if (rightController == null)
-        {
-            rightController.SendHapticImpulse(0.5f, duration);
-        }
-    }
-
-    void SendLeftHapticsImpulse(float duration)
-    {
-        if (leftController != null)
-        {
-            leftController.SendHapticImpulse(0.5f, duration);
-        }
     }
 }
