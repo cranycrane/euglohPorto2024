@@ -9,6 +9,8 @@ TagManager:
   - rightController
   - leftController
   - firstAidKitElement
+  - wrongFirstAid
+  - box
   layers:
   - Default
   - TransparentFX
