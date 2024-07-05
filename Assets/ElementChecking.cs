@@ -67,9 +67,7 @@ public class ElementChecking : MonoBehaviour
             }
 
 
-            // Use wrongCount for your logic
-            Debug.Log("Number of wrong objects within the bounding box: " + wrongCount);
-            Debug.Log("Number of right objects within the bounding box " + kitCount);
+            // Use wrongCount for your logi
 
         }
         else

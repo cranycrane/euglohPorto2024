@@ -22,9 +22,9 @@ public class BoxMovementOnHandDistance : MonoBehaviour
     private bool isMoving = false;
     private bool timerStarted = false;
     private bool showFinalTime = false;
-    private float countdownTime = 10f;
+    private float countdownTime = 60f;
     private float timeInArea = 0f;
-    private float finalTimeDisplayDuration = 10f; 
+    private float finalTimeDisplayDuration = 60f; 
     private float finalTimeDisplayTime = 0f;
     private Sequence heartbeatSequence;
 
@@ -38,7 +38,7 @@ public class BoxMovementOnHandDistance : MonoBehaviour
         startPosition = transform.position;
         audioSource.clip = heartBeatSong;
         heartbeatSequence = DOTween.Sequence();
-        heartbeatSequence.Append(transform.DOMove(startPosition + transform.up * moveDistance, moveDuration).SetEase(Ease.InOutSine));
+        heartbeatSequence.Append(transform.DOMove(startPosition - transform.up * moveDistance, moveDuration).SetEase(Ease.InOutSine));
         heartbeatSequence.Append(transform.DOMove(startPosition, moveDuration).SetEase(Ease.InOutSine));
         heartbeatSequence.SetLoops(-1, LoopType.Restart);
         heartbeatSequence.SetDelay(beatInterval - moveDuration * 2);
