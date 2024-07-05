@@ -1,11 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AnswerScript : MonoBehaviour
 {
     public bool isCorrect = false;
     public QuizManager quizManager;
+    public UnityEvent onButtonPressed;
+    public UnityEvent onButtonReleased;
+    public ParticleSystem particleSystem;
+    private bool isPressed = false;
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("ENTERED");
+        if (other.CompareTag("GameController") && !isPressed)
+        {
+            isPressed = true;
+            particleSystem.Play();
+            onButtonPressed.Invoke();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("GameController") && isPressed)
+        {
+            particleSystem.Stop();
+            isPressed = false;
+            onButtonReleased.Invoke();
+        }
+    }
     public void Answer()
     {
         if(isCorrect)
