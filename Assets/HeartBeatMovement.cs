@@ -114,10 +114,12 @@ public class BoxMovementOnHandDistance : MonoBehaviour
     {
         timerText.text = "Can you feel the heart rate? If not, try massage again.";
 
-        if ((timeInArea / countdownTime) >= successEfficiency)
+        Debug.Log("Time in area: " + timeInArea.ToString() + " Countdowntime: " + finalTimeDisplayDuration.ToString());
+
+        if ((timeInArea / finalTimeDisplayDuration) >= successEfficiency)
         {
             Debug.Log("Pacient saved!");
-            breathingZone heartVibrationScript = GetComponent<breathingZone>();
+            breathingZone heartVibrationScript = heartVibration.GetComponentInChildren<breathingZone>();
             heartVibrationScript.enabled = true;
         }
 
