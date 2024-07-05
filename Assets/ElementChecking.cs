@@ -50,14 +50,14 @@ public class ElementChecking : MonoBehaviour
             // if the bounding box is complete
             if (kitCount == kitObjects.Length && wrongCount == 0)
             {
-                textMeshProUGUI.text = "Completed!!!";
+                textMeshProUGUI.text = "Kit status: Completed!!!";
                 GlobalVariables.kitStatus = "completed";
             }
             // if the bounding box is incomplete
             if (kitCount < kitObjects.Length && wrongCount == 0)
             {
-                textMeshProUGUI.text = "Incomplete";
-                GlobalVariables.kitStatus = "incomplete";
+                textMeshProUGUI.text = "Kit status: Incomplete";
+                GlobalVariables.kitStatus = "Kit status: incomplete";
             }
             // if intruder
             if (wrongCount > 0)
