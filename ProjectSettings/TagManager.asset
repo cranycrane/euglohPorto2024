@@ -8,6 +8,7 @@ TagManager:
   - SnapObj
   - rightController
   - leftController
+  - firstAidKitElement
   layers:
   - Default
   - TransparentFX
