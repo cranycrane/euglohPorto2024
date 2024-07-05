@@ -12,6 +12,8 @@ public class AnswerScript : MonoBehaviour
     public ParticleSystem particleSystem;
     private bool isPressed = false;
 
+    public Animator animator;
+
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("ENTERED");
@@ -38,6 +40,7 @@ public class AnswerScript : MonoBehaviour
         {
             Debug.Log("Correct answer");
             quizManager.Correct();
+            animator.SetTrigger("Kill");
         }
         else
         {
